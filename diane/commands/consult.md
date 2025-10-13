@@ -41,6 +41,8 @@ Examples:
 
 ## Vault Configuration
 
+**⚠️ IMPORTANT**: If you haven't run `/diane:setup` yet, please run it first to configure your vault path.
+
 **Vault Path**: `/Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box`
 
 **Folder Structure**:
@@ -52,12 +54,7 @@ Examples:
 
 ## Your Projects
 
-Diane knows about your three major projects:
-- **Earth Angel**: Music production, FM synthesis, sound design
-- **Age of Icons**: VR narrative framework, database narrative, procedural generation
-- **Vibes.diy**: Startup, viral apps, theme systems, UI design
-
-She'll look for cross-project insights and unexpected bridges between these domains.
+Diane will discover your projects by analyzing your `40 Project notes/` folder. She'll look for cross-project insights and unexpected bridges between different domains.
 
 ## What to Expect
 
@@ -100,6 +97,6 @@ What would you like to explore further?
 
 ## Invoking Diane
 
-When you're ready, Claude Code will launch the diane-consult subagent to analyze your vault and provide her insights. The subagent has access to read your notes, search for patterns, and provide the thoughtful, perceptive guidance that Diane is known for.
+When you're ready, Claude Code will launch the diane-consult subagent to analyze your vault at `/Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box` and provide her insights. The subagent has access to read your notes, search for patterns, and provide the thoughtful, perceptive guidance that Diane is known for.
 
 **Ready to begin?** Diane will now scan your vault and share her observations.

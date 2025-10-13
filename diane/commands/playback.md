@@ -8,6 +8,8 @@ You are processing unstructured notes from two sources: (1) voice-transcribed no
 
 ## Configuration
 
+**⚠️ IMPORTANT**: If you haven't run `/diane:setup` yet, please run it first to configure your vault path.
+
 **Vault Path:** `/Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box`
 
 **Folders:**
