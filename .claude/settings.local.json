@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box/00 Diane/**)",
+      "Read(//Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box/**)",
+      "Read(//Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box/30 Permanent notes/**)",
+      "Read(//Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box/40 Project notes/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

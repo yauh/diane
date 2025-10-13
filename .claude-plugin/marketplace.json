@@ -1,0 +1,13 @@
+{
+  "name": "diane",
+  "owner": {
+    "name": "Marcus Estes"
+  },
+  "plugins": [
+    {
+      "name": "diane",
+      "source": "./diane",
+      "description": "Process voice-captured notes into structured Zettelkasten notes with automatic linking"
+    }
+  ]
+}
