@@ -64,12 +64,6 @@ A big part of Diane's workflow is capturing quick voice notes "from the field"â€
 
 1. Download [SuperWhisper](https://superwhisper.com/) from the App Store
 2. Open SuperWhisper and grant microphone permissions
-3. Configure Obsidian integration:
-   - Open SuperWhisper settings
-   - Go to **Integrations** â†’ **Obsidian**
-   - Set vault path to your iCloud Obsidian vault
-   - Set target folder to `00 Diane/`
-   - Enable **Auto-save to Obsidian**
 
 ### Configuring the Action Button (iPhone 15 Pro/Pro Max or later)
 
