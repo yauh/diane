@@ -1,4 +1,4 @@
-![Diane](./diane/assets/diane.jpg)
+![Diane](./diane/assets/diane.gif)
 
 # Diane
 
