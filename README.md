@@ -58,6 +58,8 @@ For detailed installation instructions, see [diane/README.md](./diane/README.md)
 
 A big part of Diane's workflow is capturing quick voice notes "from the field"—thoughts while walking, reading, or working away from your desk. SuperWhisper on iOS makes this seamless, especially when configured with the iPhone's Action Button for instant recording.
 
+![Voice notes from the field](./diane/assets/notes.jpg)
+
 ### Installing SuperWhisper
 
 1. Download [SuperWhisper](https://superwhisper.com/) from the App Store
