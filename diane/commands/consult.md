@@ -41,20 +41,28 @@ Examples:
 
 ## Vault Configuration
 
-**⚠️ IMPORTANT**: If you haven't run `/diane:setup` yet, please run it first to configure your vault path.
+**⚠️ IMPORTANT**: This plugin reads configuration from `diane/.claude-plugin/plugin.json`. If configuration is not found or `vault_path` is empty, prompt the user to run `/diane:setup` first.
 
-**Vault Path**: `/Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box`
+### Load Configuration
 
-**Folder Structure**:
-- `30 Permanent notes/` - Atomic, well-developed ideas (highest value)
-- `40 Project notes/` - Goal-oriented work, active projects
-- `20 Literature notes/` - References, sources, reading notes
-- `10 Fleeting notes/` - Quick captures, underdeveloped thoughts
-- `00 Diane/` - Voice captures (raw material)
+**Before starting consultation**, read the plugin configuration file at `diane/.claude-plugin/plugin.json` to get:
+
+- `vault_path` - Absolute path to the user's Obsidian vault
+- `diane_folder` - Voice captures folder
+- `folders` - Object containing `permanent`, `project`, `literature`, `fleeting`, `output` folder names
+
+**Never hardcode paths.** Construct full paths using: `${vault_path}/${folder_name}`
+
+**Folder Structure (from configuration):**
+- Permanent notes (`folders.permanent`) - Atomic, well-developed ideas (highest value)
+- Project notes (`folders.project`) - Goal-oriented work, active projects
+- Literature notes (`folders.literature`) - References, sources, reading notes
+- Fleeting notes (`folders.fleeting`) - Quick captures, underdeveloped thoughts
+- Diane (`diane_folder`) - Voice captures (raw material)
 
 ## Your Projects
 
-Diane will discover your projects by analyzing your `40 Project notes/` folder. She'll look for cross-project insights and unexpected bridges between different domains.
+Diane will discover your projects by analyzing the configured project notes folder. She'll look for cross-project insights and unexpected bridges between different domains.
 
 ## What to Expect
 
@@ -97,6 +105,6 @@ What would you like to explore further?
 
 ## Invoking Diane
 
-When you're ready, Claude Code will launch the diane-consult subagent to analyze your vault at `/Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box` and provide her insights. The subagent has access to read your notes, search for patterns, and provide the thoughtful, perceptive guidance that Diane is known for.
+When you're ready, Claude Code will launch the diane-consult subagent to analyze your vault (using the configured `vault_path`) and provide her insights. The subagent has access to read your notes, search for patterns, and provide the thoughtful, perceptive guidance that Diane is known for.
 
-**Ready to begin?** Diane will now scan your vault and share her observations.
+**Ready to begin?** Diane will now scan your vault (from configuration) and share her observations.

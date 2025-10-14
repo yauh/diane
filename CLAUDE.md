@@ -35,12 +35,25 @@ diane/                              # Marketplace root
 - **Slash Commands**: Markdown files in `commands/` that define prompts Claude Code executes when invoked
 - **Plugin Configuration**: JSON file defining vault paths, folder structure, and naming conventions
 
-## Obsidian Vault Structure
+## Configuration Pattern
 
-The plugin operates on an Obsidian vault at:
-`/Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box`
+**IMPORTANT: This is an open-source plugin designed for use by multiple users.**
 
-**Folder hierarchy:**
+### Path Configuration
+
+All directory paths are **configured during setup** via the `/diane:setup` command and stored in `diane/.claude-plugin/plugin.json`. Commands must **never hardcode paths** - they should always read from the plugin configuration.
+
+**Configuration variables (in `plugin.json`):**
+- `vault_path` - Absolute path to the user's Obsidian vault (empty by default, set during setup)
+- `diane_folder` - Name of the Diane folder for voice captures
+- `folders` - Object containing `fleeting`, `literature`, `permanent`, `project`, `output` folder names
+- `naming` - Contains `style` (kebab-case) and `wikilink_format` (display-name)
+
+### Obsidian Vault Structure
+
+The plugin operates on any Obsidian vault configured by the user during setup.
+
+**Default folder hierarchy:**
 - `00 Diane/` - Voice note captures from SuperWhisper (timestamped files like `2025-10-13-0930.md`)
 - `10 Fleeting notes/` - Quick captures, underdeveloped thoughts
 - `20 Literature notes/` - Insights from books, articles, sources
@@ -48,6 +61,8 @@ The plugin operates on an Obsidian vault at:
 - `40 Project notes/` - Goal-oriented work, active projects
 - `99 Output/` - Published work
 - `_templates/` - Templater templates for note creation
+
+**Note:** Users may customize these folder names during setup. Commands should reference the configured folder paths, not assume these defaults.
 
 **Naming conventions:**
 - Files: kebab-case (e.g., `ritual-interface-bridge.md`)
@@ -57,20 +72,21 @@ The plugin operates on an Obsidian vault at:
 
 ### `/playback` - Voice Note Processor
 
-**Purpose:** Process voice-transcribed notes from `00 Diane/` into structured Zettelkasten notes
+**Purpose:** Process voice-transcribed notes from the Diane folder into structured Zettelkasten notes
 
 **Workflow:**
-1. List unprocessed voice notes with preview
-2. User selects a note to process
-3. Read and analyze content:
+1. Read plugin configuration to get vault path and folder structure
+2. List unprocessed voice notes with preview from configured Diane and Fleeting folders
+3. User selects a note to process
+4. Read and analyze content:
    - Expand conversational transcription into clear prose
    - Fix transcription errors and complete thoughts
    - Identify atomic concepts (one idea per note)
    - Detect implicit references by checking recent notes
-4. Find semantic connections across entire vault
-5. Generate preview with suggested title, destination folder, and wikilinks
-6. User approves, edits, skips, or cancels
-7. Create note in destination folder, archive original to `00 Diane/processed/`
+5. Find semantic connections across entire vault
+6. Generate preview with suggested title, destination folder, and wikilinks
+7. User approves, edits, skips, or cancels
+8. Create note in destination folder, archive original to configured processed subfolder
 
 **Key behaviors:**
 - Interactive (one note at a time)
@@ -168,18 +184,37 @@ Edit `diane/.claude-plugin/plugin.json` to change:
 ### Installing Plugin Locally
 
 ```bash
-# From this directory
-/plugin marketplace add /Users/marcusestes/Websites/diane
+# From the plugin repository directory
+/plugin marketplace add <path-to-diane-repo>
 /plugin install diane@diane
+```
+
+### Accessing Configuration in Commands
+
+When writing command prompts, always:
+
+1. **Read configuration first** - Load `diane/.claude-plugin/plugin.json` to get vault path and folder structure
+2. **Use configured paths** - Construct file paths using `vault_path` + folder name from config
+3. **Never hardcode** - Don't assume vault locations or folder names
+4. **Validate paths exist** - Check that `vault_path` is not empty and directories are accessible before operations
+
+Example pattern:
+```markdown
+1. Read configuration from diane/.claude-plugin/plugin.json
+2. Extract vault_path and diane_folder (or folders.fleeting, etc.)
+3. Construct full path: ${vault_path}/${diane_folder}
+4. Validate that vault_path is not empty (if empty, prompt user to run /diane:setup)
+5. Scan for notes in that directory
 ```
 
 ## Important Constraints
 
-- **iCloud sync delays**: Vault is on iCloud Drive, so file operations may have sync latency
+- **No hardcoded paths**: This is an open-source plugin - always read paths from plugin configuration, never hardcode directory locations
+- **iCloud sync delays**: Many users store vaults on iCloud Drive, so file operations may have sync latency
 - **Wikilink format**: Must use display name format `[[Display Name]]` mapping to `display-name.md`
 - **Atomic notes**: Each permanent note should contain exactly one clear idea
 - **Template dependency**: Requires Obsidian Templater plugin for note creation
-- **Voice note archival**: Always move processed notes to `00 Diane/processed/` to avoid reprocessing
+- **Voice note archival**: Always move processed notes to the configured processed folder to avoid reprocessing
 
 ## Philosophy
 

@@ -8,11 +8,17 @@ Find semantically related notes in your vault and suggest wikilinks to create co
 
 ## Configuration
 
-**⚠️ IMPORTANT**: If you haven't run `/diane:setup` yet, please run it first to configure your vault path.
+**⚠️ IMPORTANT**: This plugin reads configuration from `diane/.claude-plugin/plugin.json`. If configuration is not found or `vault_path` is empty, prompt the user to run `/diane:setup` first.
 
-**Vault Path:** `/Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box`
+### Load Configuration
 
-**Wikilink Format:** Display name (e.g., `[[Ritual Interface Bridge]]`)
+**Before starting**, read the plugin configuration file at `diane/.claude-plugin/plugin.json` to get:
+
+- `vault_path` - Absolute path to the user's Obsidian vault
+- `folders` - Folder names for permanent, literature, project, fleeting notes
+- `naming.wikilink_format` - Display name format (e.g., `[[Ritual Interface Bridge]]`)
+
+**Never hardcode paths.** Always construct full paths using: `${vault_path}/${folder_name}`
 
 ## Usage
 
@@ -57,11 +63,11 @@ Search the entire vault for related notes, focusing on:
 4. **Bridge notes** - Notes that connect the target to other clusters
 5. **Source material** - Literature notes that provide foundation or evidence
 
-**Search Priority:**
-- Permanent notes (30 Permanent notes/) - Highest priority, most valuable connections
-- Literature notes (20 Literature notes/) - Good for evidence and references
-- Project notes (40 Project notes/) - Connect ideas to active work
-- Fleeting notes (10 Fleeting notes/) - Lower priority, may reveal developing thoughts
+**Search Priority (use configured folder paths):**
+- Permanent notes (from `folders.permanent`) - Highest priority, most valuable connections
+- Literature notes (from `folders.literature`) - Good for evidence and references
+- Project notes (from `folders.project`) - Connect ideas to active work
+- Fleeting notes (from `folders.fleeting`) - Lower priority, may reveal developing thoughts
 
 ### Step 4: Rank and Present Suggestions
 
@@ -198,7 +204,7 @@ This would strengthen connections between these clusters.
 
 **User:** "Find links for my note about ritual interfaces"
 
-**You read:** `30 Permanent notes/ritual-as-interface-bridge.md`
+**You read:** `${vault_path}/${folders.permanent}/ritual-as-interface-bridge.md`
 
 **You search vault and respond:**
 

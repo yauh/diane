@@ -161,17 +161,22 @@ mkdir -p "[vault_path]/_templates"
 
 Report success for each folder created.
 
-### Step 7: Update Configuration Files
+### Step 7: Update Configuration File
 
 Now update the plugin configuration:
 
-1. Update `plugin.json` with the new settings using the Edit tool
-2. Update all command files (playback.md, consult.md, find-links.md) with the new vault path and folder names using the Edit tool
+**Read the current configuration** from `diane/.claude-plugin/plugin.json` and update it with the new settings using the Edit tool.
 
-For each command file, replace:
-- The hardcoded vault path
-- The hardcoded folder names
-- Any other configuration-specific values
+Update these fields in `plugin.json`:
+- `configuration.vault_path` - Set to the validated vault path
+- `configuration.diane_folder` - Set to the voice captures folder name (e.g., "00 Diane")
+- `configuration.folders.fleeting` - Set to fleeting notes folder name
+- `configuration.folders.literature` - Set to literature notes folder name
+- `configuration.folders.permanent` - Set to permanent notes folder name
+- `configuration.folders.project` - Set to project notes folder name
+- `configuration.naming.style` - Set to the chosen naming convention
+
+**IMPORTANT**: Do NOT modify any command files (playback.md, consult.md, find-links.md). They are designed to read configuration from plugin.json dynamically. This ensures the plugin works for all users without modification.
 
 ### Step 8: Confirmation
 

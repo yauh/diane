@@ -8,20 +8,20 @@ You are processing unstructured notes from two sources: (1) voice-transcribed no
 
 ## Configuration
 
-**⚠️ IMPORTANT**: If you haven't run `/diane:setup` yet, please run it first to configure your vault path.
+**⚠️ IMPORTANT**: This plugin reads configuration from `diane/.claude-plugin/plugin.json`. If configuration is not found or incomplete, prompt the user to run `/diane:setup` first.
 
-**Vault Path:** `/Users/marcusestes/Library/Mobile Documents/iCloud~md~obsidian/Documents/Slip Box`
+### Step 0: Load Configuration
 
-**Folders:**
-- Diane (voice captures): `00 Diane/`
-- Fleeting notes: `10 Fleeting notes/`
-- Literature notes: `20 Literature notes/`
-- Permanent notes: `30 Permanent notes/`
-- Project notes: `40 Project notes/`
+**Before doing anything else**, read the plugin configuration file at `diane/.claude-plugin/plugin.json` to get:
 
-**Naming Conventions:**
-- Files: kebab-case (e.g., `ritual-interface-bridge.md`)
-- Wikilinks: Display name format (e.g., `[[Ritual Interface Bridge]]`)
+- `vault_path` - Absolute path to the user's Obsidian vault
+- `diane_folder` - Name of the Diane folder (for voice captures)
+- `folders` - Object containing: `fleeting`, `literature`, `permanent`, `project`, `output`
+- `naming` - File naming style and wikilink format
+
+**Never hardcode paths.** Always construct full paths using: `${vault_path}/${folder_name}`
+
+If `vault_path` is empty or missing, prompt the user to run `/diane:setup` first.
 
 **Processing Mode:** Interactive (one note at a time)
 
@@ -29,25 +29,27 @@ You are processing unstructured notes from two sources: (1) voice-transcribed no
 
 ### Step 1: List Unprocessed Notes
 
-Scan **both** the `00 Diane/` folder and the `10 Fleeting notes/` folder for notes to process.
+Using the paths from configuration, scan **both** the Diane folder and the Fleeting notes folder for notes to process:
+
+- Construct paths: `${vault_path}/${diane_folder}` and `${vault_path}/${folders.fleeting}`
 
 - **Diane notes:** Voice captures, typically named with timestamps like `2025-10-13-0930.md`
 - **Fleeting notes:** Underdeveloped thoughts that need expansion into permanent/project notes
 
 Present a numbered list of available notes with a preview of their content (first 100 characters) and indicate the source folder.
 
-Example:
+Example (folder names will vary based on user's configuration):
 ```
 Found 5 notes to process:
 
-From 00 Diane/:
+From [Diane folder]:
 [1] 2025-10-13-0930.md
     "Had that thought about how the ritual thing ties into..."
 
 [2] 2025-10-13-1415.md
     "Read interesting article about emergence and how systems..."
 
-From 10 Fleeting notes/:
+From [Fleeting folder]:
 [3] quick-thought-on-themes.md
     "Themes might work like Tarot cards, need to explore..."
 
@@ -71,9 +73,9 @@ Once the user selects a note, read its full content and:
    - Multiple distinct ideas (suggest splitting into multiple notes)
 
 3. **Detect Context:** Look for implicit references like "that thing I was thinking about" or "the article" by:
-   - Checking recent literature notes (20 Literature notes/)
-   - Checking active project notes (40 Project notes/)
-   - Checking recent permanent notes (30 Permanent notes/)
+   - Checking recent literature notes in the configured literature folder
+   - Checking active project notes in the configured project folder
+   - Checking recent permanent notes in the configured permanent folder
    - Using semantic understanding to infer what the user is referencing
 
 ### Step 3: Find Connections
@@ -88,12 +90,12 @@ Generate suggested wikilinks using display name format: `[[Ritual Interface Brid
 
 ### Step 4: Recommend Destination
 
-Determine the appropriate folder based on the note's maturity:
+Determine the appropriate folder based on the note's maturity (use configured folder paths):
 
-- **Fleeting (10 Fleeting notes/):** Quick captures, underdeveloped thoughts, need more processing
-- **Literature (20 Literature notes/):** References to books, articles, sources, quotes
-- **Permanent (30 Permanent notes/):** Well-developed atomic ideas, clear insights, original thinking
-- **Project (40 Project notes/):** Goal-oriented work, specific outputs, project planning
+- **Fleeting:** Quick captures, underdeveloped thoughts, need more processing → `${folders.fleeting}`
+- **Literature:** References to books, articles, sources, quotes → `${folders.literature}`
+- **Permanent:** Well-developed atomic ideas, clear insights, original thinking → `${folders.permanent}`
+- **Project:** Goal-oriented work, specific outputs, project planning → `${folders.project}`
 
 ### Step 5: Generate Preview
 
@@ -145,7 +147,7 @@ Suggested filename: [kebab-case-name].md
 
 When creating the note:
 
-1. Create file in destination folder with kebab-case filename
+1. Create file in destination folder with kebab-case filename (use configured folder path)
 2. Use the appropriate Zettelkasten structure:
    - Frontmatter with created date, type, tags
    - # Title
@@ -153,10 +155,10 @@ When creating the note:
    - ## Why it matters
    - ## Evidence / References
    - ## Links
-3. Ensure wikilinks use display name format
+3. Ensure wikilinks use display name format from configuration
 4. After successful creation, archive the original note:
-   - **Diane notes (`00 Diane/`):** Move to `00 Diane/processed/` (create folder if needed)
-   - **Fleeting notes (`10 Fleeting notes/`):** Move to `10 Fleeting notes/processed/` (create folder if needed)
+   - **Diane notes:** Move to `${vault_path}/${diane_folder}/processed/` (create subfolder if needed)
+   - **Fleeting notes:** Move to `${vault_path}/${folders.fleeting}/processed/` (create subfolder if needed)
 
 ## Special Handling
 
@@ -199,7 +201,7 @@ If the voice note is about a project:
 This appears to be a project-oriented note.
 
 Create as:
-[P] New project note in 40 Project notes/
+[P] New project note in [project folder]
 [F] Fleeting note to develop later
 [A] Add to existing project: [list active projects]
 ```
@@ -248,8 +250,8 @@ This concept bridges two separate research threads: interface theory and cyber-r
 [[Ritual as Interface]] [[Cyber Religion Essay]] [[Interface Theory Johnson]] [[Digital Sacred Practices]]
 ```
 
-**Destination:** `30 Permanent notes/ritual-as-interface-bridge.md`
+**Destination:** `[permanent folder]/ritual-as-interface-bridge.md` (using configured path)
 
 ---
 
-Begin by scanning both the `00 Diane/` and `10 Fleeting notes/` folders and listing all available notes to process.
+Begin by reading the plugin configuration from `diane/.claude-plugin/plugin.json`, then scan both the Diane and Fleeting notes folders (using configured paths) and list all available notes to process.

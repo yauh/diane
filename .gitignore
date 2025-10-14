@@ -1,2 +1,8 @@
 # macOS
 .DS_Store
+
+# Local Claude Code configuration
+.claude/
+
+# Note: diane/.claude-plugin/plugin.json contains user-specific vault paths
+# After running /diane:setup, do not commit your local changes to this file
