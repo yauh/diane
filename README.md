@@ -251,4 +251,3 @@ MIT
 
 **Version:** 1.0.0
 **Author:** Marcus Estes
-**Documentation:** [Full documentation](./diane/README.md)
