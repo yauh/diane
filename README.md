@@ -22,7 +22,7 @@ Based on Sönke Ahrens' *How to Take Smart Notes*:
 - **Build knowledge graph** - Every note connects to existing ideas
 - **Atomic notes** - One idea, one note, many connections
 - **Semantic over keyword** - Find conceptual relationships, not just text matches
-- **Progressive elaboration** - Fleeting → Literature → Permanent → Project → Output
+- **Progressive elaboration** - Fleeting → Literature → Permanent → Ideas → Project → Output
 
 ## Installation
 
@@ -119,9 +119,10 @@ The setup wizard will guide you through:
    ├── 00 Diane/              # Voice note captures
    │   └── processed/         # Archived processed notes
    ├── 10 Fleeting notes/     # Quick captures
-   ├── 20 Literature notes/   # Source insights
-   ├── 30 Permanent notes/    # Atomic ideas
-   ├── 40 Project notes/      # Active work
+   ├── 20 Ideas/              # Proto-projects with many connections
+   ├── 30 Literature notes/   # Source insights
+   ├── 40 Permanent notes/    # Atomic ideas
+   ├── 50 Project notes/      # Active work
    ├── 99 Output/             # Published work
    └── _templates/            # Templater templates
    ```
@@ -179,9 +180,10 @@ Slip Box/
 ├── 00 Diane/              # Voice note captures
 │   └── processed/         # Archived notes
 ├── 10 Fleeting notes/     # Quick captures
-├── 20 Literature notes/   # Source insights
-├── 30 Permanent notes/    # Atomic ideas
-├── 40 Project notes/      # Active work
+├── 20 Ideas/              # Proto-projects with many connections
+├── 30 Literature notes/   # Source insights
+├── 40 Permanent notes/    # Atomic ideas
+├── 50 Project notes/      # Active work
 ├── 99 Output/             # Published work
 └── _templates/            # Templater templates
 ```
@@ -214,7 +216,8 @@ The Diane workflow embraces capturing thoughts exactly when and where they occur
 
 5. **Create** - Build projects from connected permanent notes
    - Let your knowledge graph guide your creative work
-   - `40 Project notes/` pulls from `30 Permanent notes/`
+   - Explore proto-projects in `20 Ideas/` before formalizing in `50 Project notes/`
+   - `50 Project notes/` pulls from `40 Permanent notes/` and `20 Ideas/`
    - Publish refined work to `99 Output/`
 
 This workflow reduces capture friction to nearly zero while maintaining rigorous knowledge management standards.

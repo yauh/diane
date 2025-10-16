@@ -11,9 +11,10 @@
     "templates_folder": "_templates",
     "folders": {
       "fleeting": "10 Fleeting notes",
-      "literature": "20 Literature notes",
-      "permanent": "30 Permanent notes",
-      "project": "40 Project notes",
+      "ideas": "20 Ideas",
+      "literature": "30 Literature notes",
+      "permanent": "40 Permanent notes",
+      "project": "50 Project notes",
       "output": "99 Output"
     },
     "naming": {

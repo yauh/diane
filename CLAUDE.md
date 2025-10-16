@@ -46,7 +46,7 @@ All directory paths are **configured during setup** via the `/diane:setup` comma
 **Configuration variables (in `plugin.json`):**
 - `vault_path` - Absolute path to the user's Obsidian vault (empty by default, set during setup)
 - `diane_folder` - Name of the Diane folder for voice captures
-- `folders` - Object containing `fleeting`, `literature`, `permanent`, `project`, `output` folder names
+- `folders` - Object containing `fleeting`, `ideas`, `literature`, `permanent`, `project`, `output` folder names
 - `naming` - Contains `style` (kebab-case) and `wikilink_format` (display-name)
 
 ### Obsidian Vault Structure
@@ -56,9 +56,10 @@ The plugin operates on any Obsidian vault configured by the user during setup.
 **Default folder hierarchy:**
 - `00 Diane/` - Voice note captures from SuperWhisper (timestamped files like `2025-10-13-0930.md`)
 - `10 Fleeting notes/` - Quick captures, underdeveloped thoughts
-- `20 Literature notes/` - Insights from books, articles, sources
-- `30 Permanent notes/` - Atomic, well-developed ideas (highest value)
-- `40 Project notes/` - Goal-oriented work, active projects
+- `20 Ideas/` - Sprawling proto-projects with many connections, not yet structured
+- `30 Literature notes/` - Insights from books, articles, sources
+- `40 Permanent notes/` - Atomic, well-developed ideas (highest value)
+- `50 Project notes/` - Goal-oriented work, active projects
 - `99 Output/` - Published work
 - `_templates/` - Templater templates for note creation
 
@@ -125,7 +126,7 @@ All notes follow atomic Zettelkasten structure:
 ---
 created: YYYY-MM-DD HH:mm
 modified: YYYY-MM-DD HH:mm
-type: permanent|fleeting|literature|project
+type: permanent|fleeting|literature|idea|project
 tags: [tag1, tag2]
 ---
 
@@ -149,6 +150,24 @@ Why this idea is significant, what it connects to, implications.
 
 [[Related Note 1]] [[Related Note 2]]
 ```
+
+**Note:** Ideas notes are less structured than the above format. They typically contain brief thoughts followed by extensive wikilinks, serving as a holding place for proto-projects that aren't ready for formal project structure yet.
+
+## Ideas Folder Philosophy
+
+The **Ideas** folder (20 Ideas/) serves as a creative sandbox between permanent notes and projects:
+
+- **Purpose**: Hold sprawling, multi-concept thoughts that aren't ready to become structured projects
+- **Characteristics**:
+  - Less structured than permanent notes (no "Why it matters" or "Evidence" sections required)
+  - Often contain brief sentences followed by many wikilinks
+  - May connect disparate permanent notes into proto-project patterns
+  - More exploratory and associative than goal-oriented
+- **When to use**:
+  - Voice/fleeting note contains project-like thinking but lacks clear structure
+  - Multiple permanent notes are connecting in interesting ways but no concrete project goals yet
+  - Exploring relationships between concepts without committing to formal project
+- **Progression**: When an Idea note gains clarity and specific goals, it graduates to Project notes (50 Project notes/)
 
 ## Development Workflow
 
@@ -224,4 +243,4 @@ Based on Sönke Ahrens' "How to Take Smart Notes":
 - **Build knowledge graph**: Every note should connect to existing ideas
 - **Atomic notes**: One idea, one note, many connections
 - **Semantic over keyword**: Find conceptual relationships, not just text matches
-- **Progressive elaboration**: Fleeting → Literature → Permanent → Project → Output
+- **Progressive elaboration**: Fleeting → Literature → Permanent → Ideas → Project → Output

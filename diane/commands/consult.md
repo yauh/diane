@@ -49,12 +49,13 @@ Examples:
 
 - `vault_path` - Absolute path to the user's Obsidian vault
 - `diane_folder` - Voice captures folder
-- `folders` - Object containing `permanent`, `project`, `literature`, `fleeting`, `output` folder names
+- `folders` - Object containing `permanent`, `ideas`, `project`, `literature`, `fleeting`, `output` folder names
 
 **Never hardcode paths.** Construct full paths using: `${vault_path}/${folder_name}`
 
 **Folder Structure (from configuration):**
 - Permanent notes (`folders.permanent`) - Atomic, well-developed ideas (highest value)
+- Ideas (`folders.ideas`) - Sprawling proto-projects, lots of connections, not yet structured
 - Project notes (`folders.project`) - Goal-oriented work, active projects
 - Literature notes (`folders.literature`) - References, sources, reading notes
 - Fleeting notes (`folders.fleeting`) - Quick captures, underdeveloped thoughts
@@ -91,7 +92,7 @@ Her responses are conversational, substantive, and action-oriented. She'll refer
 
 **Diane**: Let me take a look at your notes. [Scans vault]
 
-I'm seeing 3 permanent notes and 21 project notes. Here's what stands out:
+I'm seeing 3 permanent notes, 5 idea notes, and 21 project notes. Here's what stands out:
 
 **Pattern I'm noticing**: Your "ritual as interface" concept is well-developed, but it hasn't touched your Vibes.diy Theme Pack work yet. Themes *are* rituals—users perform the transformation ritual.
 
