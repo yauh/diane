@@ -8,11 +8,11 @@ You are processing unstructured notes from two sources: (1) voice-transcribed no
 
 ## Configuration
 
-**⚠️ IMPORTANT**: This plugin reads configuration from `diane/.claude-plugin/plugin.json`. If configuration is not found or incomplete, prompt the user to run `/diane:setup` first.
+**⚠️ IMPORTANT**: This plugin reads configuration from `diane/.claude-plugin/config.json`. If configuration is not found or incomplete, prompt the user to run `/diane:setup` first.
 
 ### Step 0: Load Configuration
 
-**Before doing anything else**, read the plugin configuration file at `diane/.claude-plugin/plugin.json` to get:
+**Before doing anything else**, read the plugin configuration file at `diane/.claude-plugin/config.json` to get:
 
 - `vault_path` - Absolute path to the user's Obsidian vault
 - `diane_folder` - Name of the Diane folder (for voice captures)
@@ -256,4 +256,4 @@ This concept bridges two separate research threads: interface theory and cyber-r
 
 ---
 
-Begin by reading the plugin configuration from `diane/.claude-plugin/plugin.json`, then scan both the Diane and Fleeting notes folders (using configured paths) and list all available notes to process.
+Begin by reading the plugin configuration from `diane/.claude-plugin/config.json`, then scan both the Diane and Fleeting notes folders (using configured paths) and list all available notes to process.

@@ -8,11 +8,11 @@ Find semantically related notes in your vault and suggest wikilinks to create co
 
 ## Configuration
 
-**⚠️ IMPORTANT**: This plugin reads configuration from `diane/.claude-plugin/plugin.json`. If configuration is not found or `vault_path` is empty, prompt the user to run `/diane:setup` first.
+**⚠️ IMPORTANT**: This plugin reads configuration from `diane/.claude-plugin/config.json`. If configuration is not found or `vault_path` is empty, prompt the user to run `/diane:setup` first.
 
 ### Load Configuration
 
-**Before starting**, read the plugin configuration file at `diane/.claude-plugin/plugin.json` to get:
+**Before starting**, read the plugin configuration file at `diane/.claude-plugin/config.json` to get:
 
 - `vault_path` - Absolute path to the user's Obsidian vault
 - `folders` - Folder names for permanent, ideas, literature, project, fleeting notes

@@ -170,19 +170,19 @@ Report success for each folder created.
 
 Now update the plugin configuration:
 
-**Read the current configuration** from `diane/.claude-plugin/plugin.json` and update it with the new settings using the Edit tool.
+**Read the current configuration** from `diane/.claude-plugin/config.json` and update it with the new settings using the Edit tool.
 
-Update these fields in `plugin.json`:
-- `configuration.vault_path` - Set to the validated vault path
-- `configuration.diane_folder` - Set to the voice captures folder name (e.g., "00 Diane")
-- `configuration.folders.fleeting` - Set to fleeting notes folder name
-- `configuration.folders.ideas` - Set to ideas folder name
-- `configuration.folders.literature` - Set to literature notes folder name
-- `configuration.folders.permanent` - Set to permanent notes folder name
-- `configuration.folders.project` - Set to project notes folder name
-- `configuration.naming.style` - Set to the chosen naming convention
+Update these fields in `config.json`:
+- `vault_path` - Set to the validated vault path
+- `diane_folder` - Set to the voice captures folder name (e.g., "00 Diane")
+- `folders.fleeting` - Set to fleeting notes folder name
+- `folders.ideas` - Set to ideas folder name
+- `folders.literature` - Set to literature notes folder name
+- `folders.permanent` - Set to permanent notes folder name
+- `folders.project` - Set to project notes folder name
+- `naming.style` - Set to the chosen naming convention
 
-**IMPORTANT**: Do NOT modify any command files (playback.md, consult.md, find-links.md). They are designed to read configuration from plugin.json dynamically. This ensures the plugin works for all users without modification.
+**IMPORTANT**: Do NOT modify any command files (playback.md, consult.md, find-links.md). They are designed to read configuration from config.json dynamically. This ensures the plugin works for all users without modification.
 
 ### Step 8: Confirmation
 
