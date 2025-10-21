@@ -1,73 +1,73 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Diese Datei beinhaltet Regeln für  (claude.ai/code) bei der Verarbeitung von code in diesem Repository.
 
-## Repository Purpose
+## Repository Zweck
 
-This repository contains a **Claude Code plugin marketplace** for the **Zettelkasten Flow** plugin, which transforms voice-transcribed notes into structured Zettelkasten notes within Obsidian. The plugin automates the workflow of processing voice captures from SuperWhisper into atomic, well-linked permanent notes.
+Dieses Repository enthält einen **Claude Code-Plugin-Marktplatz** für das **Zettelkasten Flow**-Plugin, das gesprochene Notizen in strukturierte Zettelkasten-Notizen in Obsidian umwandelt. Das Plugin automatisiert den Workflow, um transkribierte Sprachaufnahmen in atomare, gut verknüpfte permanente Notizen zu transformieren.
 
-## Plugin Architecture
+## Plugin Architectur
 
-### Plugin System Structure
+### Systemstruktur des Plugin
 
 ```
-diane/                              # Marketplace root
+diane/                              # Root des Marktplatzes
 ├── .claude-plugin/
-│   └── marketplace.json            # Marketplace manifest
-└── diane/                          # Plugin directory
+│   └── marketplace.json            # Marktplatz-Manifest
+└── diane/                          # Plugin-Verzeichnis
     ├── .claude-plugin/
-    │   └── plugin.json             # Plugin configuration
-    ├── commands/                   # Slash command definitions
-    │   ├── playback.md             # /playback command (voice note processor)
-    │   ├── consult.md              # /consult command (vault analyst)
-    │   └── find-links.md           # /find-links command (semantic linking)
-    └── templates/                  # Obsidian Templater templates
+    │   └── plugin.json             # Plugin-Konfiguration
+    ├── commands/                   # Slash-Befehlsdefinitionen
+    │   ├── playback.md             # /playback-Befehl (Sprachnotizen-Verarbeiter)
+    │   ├── consult.md              # /consult-Befehl (Vault-Analyst)
+    │   └── find-links.md           # /find-links-Befehl (Semantische Verknüpfung)
+    └── templates/                  # Obsidian-Templater-Vorlagen
         ├── permanent-note.md
         ├── fleeting-note.md
         ├── literature-note.md
         └── project-note.md
 ```
 
-### Key Concepts
+### Wichtige Konzepte
 
-- **Marketplace**: A local plugin registry defined by `.claude-plugin/marketplace.json` at the repository root
-- **Plugin**: A collection of slash commands, templates, and configuration stored in a subdirectory
-- **Slash Commands**: Markdown files in `commands/` that define prompts Claude Code executes when invoked
-- **Plugin Configuration**: JSON file defining vault paths, folder structure, and naming conventions
+- **Marktplatz**: Ein lokales Plugin-Registry, definiert durch `.claude-plugin/marketplace.json` im Repository-Stamm
+- **Plugin**: Eine Sammlung von Slash-Befehlen, Vorlagen und Konfiguration, gespeichert in einem Unterverzeichnis
+- **Slash-Befehle**: Markdown-Dateien in `commands/`, die Prompts definieren, die Claude Code ausführt, wenn sie aufgerufen werden
+- **Plugin-Konfiguration**: JSON-Datei, die Vault-Pfade, Ordnerstruktur und Namenskonventionen definiert
 
-## Configuration Pattern
+## Konfigurationshinweise
 
-**IMPORTANT: This is an open-source plugin designed for use by multiple users.**
+**Wichtig: Dies ist ein Open-Source-Plugin, das für mehrere Benutzer gedacht ist.**
 
-### Path Configuration
+### Pfad Konfiguration
 
-All directory paths are **configured during setup** via the `/diane:setup` command and stored in `diane/.claude-plugin/plugin.json`. Commands must **never hardcode paths** - they should always read from the plugin configuration.
+Alle Verzeichnispfade werden **während der Einrichtung konfiguriert** über den Befehl `/diane:setup` und in `diane/.claude-plugin/plugin.json` gespeichert. Befehle dürfen **niemals Pfade harcoden** – sie sollten immer aus der Plugin-Konfiguration lesen.
 
-**Configuration variables (in `plugin.json`):**
-- `vault_path` - Absolute path to the user's Obsidian vault (empty by default, set during setup)
-- `diane_folder` - Name of the Diane folder for voice captures
-- `folders` - Object containing `fleeting`, `ideas`, `literature`, `permanent`, `project`, `output` folder names
-- `naming` - Contains `style` (kebab-case) and `wikilink_format` (display-name)
+**Konfigurationsvariablen (in `plugin.json`):**
+- `vault_path` - Absoluter Pfad zum Benutzer-Vault (standardmäßig leer, wird während der Einrichtung gesetzt)
+- `diane_folder` - Name des Diane-Ordners für Sprachaufnahmen
+- `folders` - Objekt mit `fleeting`, `ideas`, `literature`, `permanent`, `project`, `output` Ordner-Namen
+- `naming` - Enthält `style` (kebab-case) und `wikilink_format` (Display-Name)
 
-### Obsidian Vault Structure
+### Obsidian-Vault-Struktur
 
-The plugin operates on any Obsidian vault configured by the user during setup.
+Das Plugin arbeitet mit jedem Obsidian-Vault, der vom Benutzer während der Einrichtung konfiguriert wird.
 
-**Default folder hierarchy:**
-- `00 Diane/` - Voice note captures from SuperWhisper (timestamped files like `2025-10-13-0930.md`)
-- `10 Fleeting notes/` - Quick captures, underdeveloped thoughts
-- `20 Ideas/` - Sprawling proto-projects with many connections, not yet structured
-- `30 Literature notes/` - Insights from books, articles, sources
-- `40 Permanent notes/` - Atomic, well-developed ideas (highest value)
-- `50 Project notes/` - Goal-oriented work, active projects
-- `99 Output/` - Published work
-- `_templates/` - Templater templates for note creation
+**Standard-Ordnerhierarchie:**
+- `00 Diane/` - Sprachaufnahmen von SuperWhisper (zeitstempelbasierte Dateien wie `2025-10-13-0930.md`)
+- `10 Fleeting notes/` - Schnelle Captures, unentwickelte Gedanken
+- `20 Ideas/` - Ausbreitende Proto-Projekte mit vielen Verbindungen, noch nicht strukturiert
+- `30 Literature notes/` - Einsichten aus Büchern, Artikeln, Quellen
+- `40 Permanent notes/` - Atome, gut entwickelte Ideen (höchster Wert)
+- `50 Project notes/` - Zielgerichtete Arbeit, aktive Projekte
+- `99 Output/` - Veröffentlichte Arbeit
+- `_templates/` - Templater-Vorlagen für Notizen
 
-**Note:** Users may customize these folder names during setup. Commands should reference the configured folder paths, not assume these defaults.
+**Hinweis:** Benutzer können diese Ordner-Namen während der Einrichtung anpassen. Befehle sollten die konfigurierten Pfade referenzieren, nicht die Standardeinstellungen annehmen.
 
 **Naming conventions:**
-- Files: kebab-case (e.g., `ritual-interface-bridge.md`)
-- Wikilinks: Display name format (e.g., `[[Ritual Interface Bridge]]`)
+- Dateien: kebab-case (z.B., `ritual-interface-bridge.md`)
+- Wikilinks: Display name format (z.B., `[[Ritual Interface Bridge]]`)
 
 ## Commands
 
