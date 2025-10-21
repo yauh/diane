@@ -7,7 +7,7 @@
     {
       "name": "diane",
       "source": "./diane",
-      "description": "Process voice-captured notes into structured Zettelkasten notes with automatic linking"
+      "description": "Verarbeitet sprachaufgezeichnete Notizen zu strukturierten Zettelkasten-Notizen mit automatischer Verknüpfung"
     }
   ]
 }
